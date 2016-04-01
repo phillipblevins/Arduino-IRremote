@@ -28,6 +28,10 @@
 // Each protocol you include costs memory and, during decode, costs time
 // Disable (set to 0) all the protocols you do not need/want!
 //
+
+#define DECODE_MILESTAG2SHOT  1
+#define SEND_MILESTAG2SHOT    1
+
 #define DECODE_RC5           1
 #define SEND_RC5             1
 
@@ -115,6 +119,7 @@ typedef
 		SHARP,
 		DENON,
 		PRONTO,
+		MILESTAG2SHOT,
 	}
 decode_type_t;
 
@@ -180,6 +185,9 @@ class IRrecv
 		long  decodeHash (decode_results *results) ;
 		int   compare    (unsigned int oldval, unsigned int newval) ;
 
+      #if DECODE_MILESTAG2SHOT
+          bool  decodeMilesTag2Shot (decode_results *results) ;
+      #endif
 		//......................................................................
 #		if (DECODE_RC5 || DECODE_RC6)
 			// This helper function is shared by RC5 and RC6
@@ -327,6 +335,9 @@ class IRsend
 #		if SEND_PRONTO
 			void  sendPronto     (char* code,  bool repeat,  bool fallback) ;
 #		endif
+      #if SEND_MILESTAG2SHOT
+          void  sendMilesTag2Shot (unsigned long data,  int nbits) ;
+      #endif
 } ;
 
 #endif
