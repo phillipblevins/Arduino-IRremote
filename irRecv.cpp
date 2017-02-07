@@ -20,9 +20,9 @@ int  IRrecv::decode (decode_results *results)
 	if (decodeNEC(results))  return true ;
 #endif
 
-#ifdef DECODE_MILESTAG2SHOT
-	  DBG_PRINTLN("Attempting MilesTag2Shot decode");
-	  if (decodeMilesTag2Shot(results))  return true ;
+#ifdef DECODE_TAGSHOT
+	  DBG_PRINTLN("Attempting TagShot decode");
+	  if (decodeTagShot(results))  return true ;
 #endif
 
 #if DECODE_SONY
